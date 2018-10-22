@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+    	<referenceContainer name="footer">
+            <referenceBlock name="form.subscribe">
+                <block class="Magento\Framework\View\Element\Text" name="newsletter-text">
+                    <arguments>
+                        <argument name="text" xsi:type="string">Subscribe to our news!</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+        
+       <!--  <referenceBlock name="subscribe">
+            <block class="Magento\Framework\View\Element\Text" name="newsletter-text" as="newsletter-text">
+                <action method="setText">
+                    <argument name="text" translate="true" xsi:type="string">Text</argument>
+                </action>
+            </block>
+        </referenceBlock> -->
+    </body>
+</page>
