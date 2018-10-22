@@ -10,13 +10,5 @@
                 </block>
             </referenceBlock>
         </referenceContainer>
-        
-       <!--  <referenceBlock name="subscribe">
-            <block class="Magento\Framework\View\Element\Text" name="newsletter-text" as="newsletter-text">
-                <action method="setText">
-                    <argument name="text" translate="true" xsi:type="string">Text</argument>
-                </action>
-            </block>
-        </referenceBlock> -->
     </body>
 </page>
