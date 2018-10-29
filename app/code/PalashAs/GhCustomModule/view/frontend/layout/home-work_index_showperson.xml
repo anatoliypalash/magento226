@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column">
+    <body>
+        <referenceContainer name="content">
+            <container name="showperson_wrapper" htmlClass="showperson_wrapper" htmlTag="div">
+                <block class="PalashAs\GhCustomModule\Block\CustomBlock" template="PalashAs_GhCustomModule::myhomework.phtml" name="show_person" />
+            </container>
+        </referenceContainer>
+    </body>
+</page>
