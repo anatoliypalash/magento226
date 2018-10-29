@@ -1,9 +1,13 @@
 <ul>
+    <?php if ($block->getName()): ?>
     <li>
         <p>Name: <?= $block->getName() ?></p>
     </li>
+    <?php endif; ?>
+    <?php if ($block->getLastname()): ?>
     <li>
         <p>Lastname: <?= $block->getLastname() ?></p>
     </li>
+    <?php endif; ?>
 </ul>
 <a href="<?= $block->getGeneratedUrlToController() ?>">Link to JSON controller</a>
