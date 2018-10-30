@@ -6,7 +6,6 @@ use Magento\Framework\Controller\ResultFactory;
 
 class JsonResponse extends \Magento\Framework\App\Action\Action
 {
-
     public function execute()
     {
         $controllerResult = $this->resultFactory->create(ResultFactory::TYPE_JSON);

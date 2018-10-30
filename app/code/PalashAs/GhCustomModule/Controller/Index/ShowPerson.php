@@ -4,7 +4,6 @@ namespace PalashAs\GhCustomModule\Controller\Index;
 
 class ShowPerson extends \Magento\Framework\App\Action\Action
 {
-
     public function execute()
     {
         $this->_view->loadLayout();
