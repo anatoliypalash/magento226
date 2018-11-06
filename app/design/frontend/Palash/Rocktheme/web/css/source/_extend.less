@@ -1,0 +1,23 @@
+& when (@media-common = true) {
+  .lib-font-face(
+    @family-name:'Gotham-Regular',
+    @font-path: '@{baseDir}fonts/Gotham-Regular',
+    @font-weight: normal,
+    @font-style: normal
+  );
+}
+
+@color-dark-blue: #000080;
+@color-dark-purple: #9400D3;
+
+@font-family__gotham-regular: 'Gotham-Regular';
+
+@font-family__base: @font-family__gotham-regular;
+
+@button-primary__border: 1px solid @color-dark-blue;
+@button-primary__background: @color-dark-purple;
+@button-primary__color: @color-white;
+
+@button-primary__hover__background: @color-dark-purple;
+@button-primary__hover__border: 1px solid @color-dark-blue;
+@button-primary__hover__color: '';
