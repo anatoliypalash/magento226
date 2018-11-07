@@ -5,7 +5,7 @@
             <block class="Magento\Catalog\Block\Product\View"
                    name="makeyourstyle.tab"
                    as="makeyourstyle"
-                   template="PalashAs_GhFrontendStuff::product/view/makeyourstyle.phtml"
+                   template="PalashAs_GhFrontendStuff::product/view/make_your_style.phtml"
                    group="detailed_info">
                 <arguments>
                     <argument name="title" translate="true" xsi:type="string">Make Your Style</argument>
