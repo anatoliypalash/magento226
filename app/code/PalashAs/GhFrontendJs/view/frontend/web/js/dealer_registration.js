@@ -3,11 +3,12 @@ define([
     ], function($){
         var DealerRegistrationModal = {
             initModal: function(config, element) {
-                $dealerForm = $('.form-create-account').clone();
+                $dealerForm = $('#dealer-registration-form');
                 $dealerForm.modal();
                 $element = $(element);
                 $element.click(function() {
                     $dealerForm.modal('openModal');
+                    $dealerForm.trigger('contentUpdated');
                 });
             }
         };
