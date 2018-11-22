@@ -101,7 +101,7 @@
             <div class="field country required">
                 <label for="dealer_country" class="label"><span><?= /* @noEscape */ $block->getAttributeData()->getFrontendLabel('country_id') ?></span></label>
                 <div class="control">
-                    <?= $block->getCountryHtmlSelect() ?>
+                    <?= $block->getCountryHtmlSelect(null, 'country_id', 'dealer_country') ?>
                 </div>
             </div>
             <?php $addressAttributes = $block->getChildBlock('customer_form_address_user_attributes');?>
@@ -124,7 +124,7 @@
                 <input type="email" name="email" autocomplete="email" id="dealer_email_address" value="<?= $block->escapeHtmlAttr($block->getFormData()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' class="input-text" data-validate="{required:true, 'validate-email':true}">
             </div>
         </div>
-        <div class="field password required">
+        <div class="field dealer-password required">
             <label for="dealer_password" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
             <div class="control">
                 <input type="password" name="password" id="dealer_password"
@@ -196,7 +196,7 @@
 <?php if ($block->getShowAddressFields()): ?>
     <script type="text/x-magento-init">
     {
-        "#country": {
+        "#dealer_country": {
             "regionUpdater": {
                 "optionalRegionAllowed": <?= /* @noEscape */ $block->getConfig('general/region/display_all') ? 'true' : 'false' ?>,
                 "regionListId": "#dealer_region_id",
@@ -214,7 +214,7 @@
 
 <script type="text/x-magento-init">
     {
-        ".field.password": {
+        ".field.dealer-password": {
             "passwordStrengthIndicator": {
                 "formSelector": "form.dealer-registration-form"
             }
