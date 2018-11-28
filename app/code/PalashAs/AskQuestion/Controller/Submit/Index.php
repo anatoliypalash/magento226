@@ -39,21 +39,11 @@ class Index extends \Magento\Framework\App\Action\Action
                 throw new LocalizedException(__('This request is not valid and can not be processed.'));
             }
 
-            if ($request->getParam('ask_question_timestamp') !== '') {
-                $cookieTimestmp = strtotime($request->getParam('ask_question_timestamp'));
-                $curtime = time();
-
-                if (($curtime - $cookieTimestmp) < 120) {
-                    $data = [
-                        'status' => self::STATUS_ERROR,
-                        'message' => 'Your request was submitted.'
-                    ];
-                } else {
-                    $data = [
-                        'status' => self::STATUS_SUCCESS,
-                        'message' => 'Your request was submitted.'
-                    ];
-                }
+            if ($request->getParam('ask_question_timestamp') == '1') {
+                $data = [
+                    'status' => self::STATUS_ERROR,
+                    'message' => 'Your request cannot be submitted.'
+                ];
             } else {
                 $data = [
                     'status' => self::STATUS_SUCCESS,

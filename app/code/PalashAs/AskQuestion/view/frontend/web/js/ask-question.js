@@ -1,13 +1,14 @@
 define([
     'jquery',
-    'jquery/ui',
     'Magento_Ui/js/modal/alert',
+    'jquery/ui',
     'mage/cookies',
-    'mage/translate'
-], function ($) {
+    'mage/translate',
+    'jquery/ui',
+], function ($, alert) {
     'use strict';
 
-    $.widget('palash.askquestion_widget', $.mage.alert, {
+    $.widget('palash.askquestion_widget', {
         options: {
             cookieName: 'ask_question_timestamp'
         },
@@ -24,7 +25,7 @@ define([
             if (!this.validateForm()) {
                 return;
             }
-           
+
             this.ajaxSubmit();
         },
 
@@ -44,7 +45,7 @@ define([
             formData.append('form_key', $.mage.cookies.get('form_key'));
             formData.append('ask_question_timestamp', $.mage.cookies.get(this.options.cookieName));
             formData.append('isAjax', 1);
-
+            var self = this;
             $.ajax({
                 url: $(this.element).attr('action'),
                 data: formData,
@@ -62,7 +63,9 @@ define([
                     });
 
                     if (response.status === 'Success') {
-                        $.mage.cookies.set(this.options.cookieName, new Date().getTime());
+                        var date = new Date();
+                        date.setTime(date.getTime() + (120 * 1000));
+                        $.mage.cookies.set(self.options.cookieName, 1, {expires: date});
                     }
                 },
 
@@ -75,13 +78,6 @@ define([
                 }
             });
         },
-
-        /**
-         * Clear that `ask_question_timestamp` cookie
-         */
-        clearCookie: function () {
-            $.mage.cookies.clear(this.options.cookieName);
-        }
     });
 
     return $.palash.askquestion_widget;
