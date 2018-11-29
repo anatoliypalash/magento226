@@ -25,7 +25,14 @@ define([
             if (!this.validateForm()) {
                 return;
             }
+            if ($.mage.cookies.get(this.options.cookieName)) {
+                alert({
+                    title: $.mage.__('Error'),
+                    content: $.mage.__('It is not possible to post more than one question in 2 minutes.')
+                });
 
+                return;
+            }
             this.ajaxSubmit();
         },
 
