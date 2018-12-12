@@ -1,0 +1,10 @@
+<?php if($block->getData('block_id')): ?>
+    <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($block->getData('block_id'))->toHtml();?>
+<?php endif; ?>
+<?php if($block->getData('title')): ?>
+    <button class="action cms-page-link"
+            onclick="location.href='/geekhub-cms'"
+            type="button">
+        <span><?php echo $block->getData('title'); ?></span>
+    </button>
+<?php endif; ?>
