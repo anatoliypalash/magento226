@@ -1,0 +1,12 @@
+<?php /** @var \PalashAs\AskQuestion\Block\Questions $block */
+    $questions = $block->getQuestions();
+?>
+<?php if ($questions->count()): ?>
+    <ul>
+        <?php /** @var \PalashAs\AskQuestion\Model\AskQuestion $question */
+        foreach ($questions as $question):
+            ?>
+            <li><?= $question->getQuestion() ?></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
