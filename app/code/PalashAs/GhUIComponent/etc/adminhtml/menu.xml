@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="PalashAs_GhUIComponent::content_extra"
+             title="Extra"
+             translate="title"
+             module="Magento_Backend"
+             sortOrder="30"
+             parent="Magento_Backend::content"
+             resource="PalashAs_GhUIComponent::content_extra"/>
+        <add id="PalashAs_GhUIComponent::ask_question"
+             title="Ask Question"
+             translate="title"
+             module="PalashAs_GhUIComponent"
+             sortOrder="50"
+             parent="PalashAs_GhUIComponent::content_extra"
+             action="askquestion/question/ask"
+             resource="PalashAs_GhUIComponent::ask_question"/>
+    </menu>
+</config>

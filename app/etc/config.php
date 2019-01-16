@@ -148,6 +148,7 @@ return [
         'PalashAs_GhCustomModule' => 1,
         'PalashAs_GhFrontendJs' => 1,
         'PalashAs_GhFrontendStuff' => 1,
+        'PalashAs_GhUIComponent' => 1,
         'Temando_Shipping' => 1,
         'Vertex_Tax' => 1
     ]
