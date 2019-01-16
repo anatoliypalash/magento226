@@ -144,6 +144,7 @@ return [
         'Magento_WishlistAnalytics' => 1,
         'Magento_WishlistSampleData' => 1,
         'PalashAs_AskQuestion' => 1,
+        'PalashAs_CustomWidget' => 1,
         'PalashAs_GhCustomModule' => 1,
         'PalashAs_GhFrontendJs' => 1,
         'PalashAs_GhFrontendStuff' => 1,

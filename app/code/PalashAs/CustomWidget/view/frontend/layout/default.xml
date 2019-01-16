@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="catalog.topnav">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="geekhubcms.link">
+                <arguments>
+                    <argument name="label" xsi:type="string">Geekhub Cms</argument>
+                    <argument name="path" xsi:type="string">geekhub-cms</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
