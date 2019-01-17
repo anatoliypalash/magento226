@@ -9,44 +9,54 @@ use Magento\Framework\Controller\ResultFactory;
 use PalashAs\AskQuestion\Model\ResourceModel\AskQuestion\Collection;
 
 /**
-* Class MassStatus
-*/
+ * Class MassStatus
+ * @package PalashAs\AskQuestion\Controller\Adminhtml\Question
+ */
 class MassStatus extends AbstractMassAction
 {
+    /**
+     * @var Filter
+     */
+    protected $filter;
 
-  /**
-   * @param Context $context
-   * @param Filter $filter
-   * @param CollectionFactory $collectionFactory
-   */
-  public function __construct(
-      Context $context,
-      Filter $filter,
-      CollectionFactory $collectionFactory
-  ) {
-      parent::__construct($context, $filter, $collectionFactory);
-  }
+    /**
+     * @var CollectionFactory
+     */
+    protected $collectionFactory;
 
-  /**
-   * @param AbstractCollection $collection
-   * @return \Magento\Backend\Model\View\Result\Redirect
-   */
-  protected function massAction(Collection $collection)
-  {
-      $rateChangeStatus = 0;
-      foreach ($collection as $rate) {
-          $rate->setStatus('answered')->save();
-          $rateChangeStatus++;
-      }
+    /**
+     * @param Context $context
+     * @param Filter $filter
+     * @param CollectionFactory $collectionFactory
+     */AbstractMassaction
+    public function __construct(
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory
+    ) {
+        $this->filter = $filter;
+        $this->collectionFactory = $collectionFactory;
+        parent::__construct($context);
+    }
 
-      if ($rateChangeStatus) {
-          $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $rateChangeStatus));
-      }
-      /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-      $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-      $resultRedirect->setPath($this->getComponentRefererUrl());
+    /**
+     * @param Collection $collection
+     * @return mixed
+     */
+    protected function massAction(Collection $collection)
+    {
+        $questionChangeStatus = 0;
+        foreach ($collection as $rate) {
+            $rate->setStatus('answered')->save();
+            $questionChangeStatus++;
+        }
 
-      return $resultRedirect;
-  }
+        if ($questionChangeStatus) {
+            $this->messageManager->addSuccess(__('A total of %1 record(s) were updated.', $questionChangeStatus));
+        }
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $resultRedirect->setPath($this->getComponentRefererUrl());
 
+        return $resultRedirect;
+    }
 }
