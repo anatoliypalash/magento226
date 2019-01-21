@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="PalashAs_AskQuestion::content_extra"
+             title="Extra"
+             translate="title"
+             module="Magento_Backend"
+             sortOrder="30"
+             parent="Magento_Backend::content"
+             resource="PalashAs_GhUIComponent::content_extra"/>
+        <add id="PalashAs_AskQuestion::ask_question_grid"
+             title="Ask Question Grid"
+             translate="title"
+             module="PalashAs_AskQuestion"
+             sortOrder="60"
+             parent="PalashAs_AskQuestion::content_extra"
+             action="askquestion_grid/question/index"
+             resource="PalashAs_AskQuestion::ask_question_grid"/>
+    </menu>
+</config>
