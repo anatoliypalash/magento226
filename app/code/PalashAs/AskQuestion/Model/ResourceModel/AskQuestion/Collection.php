@@ -9,6 +9,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     private $storeManager;
 
+    protected $_eventPrefix = 'palashas_ask_question_collection';
+
+    protected $_eventObject = 'askquestion_collection';
+
     /**
      * Collection constructor.
      * @param \Magento\Framework\Data\Collection\EntityFactoryInterface $entityFactory
@@ -44,18 +48,4 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
         );
     }
 
-    /**
-     * @param int $storeId
-     * @return Collection
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function addStoreFilter(int $storeId = 0)
-    {
-        if (!$storeId) {
-            $storeId = (int) $this->storeManager->getStore()->getId();
-        }
-        $this->addFieldToFilter('store_id', $storeId);
-
-        return $this;
-    }
 }
