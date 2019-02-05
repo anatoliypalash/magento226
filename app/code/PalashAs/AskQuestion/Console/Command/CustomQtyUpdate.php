@@ -13,7 +13,7 @@ class CustomQtyUpdate extends \Symfony\Component\Console\Command\Command
      * @var \Magento\Framework\App\State
      */
     private $state;
-    
+
     /**
      * @var Magento\CatalogInventory\Api\StockStateInterface
      */
