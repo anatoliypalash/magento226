@@ -32,7 +32,7 @@ class Changestatus
     public function execute()
     {
         $currentDate = date("Y-m-d h:i:s");
-        $filterDateTime = strtotime('-' . self::DAYS_NUM . ' day', strtotime($currentDate));
+        $filterDateTime = strtotime('-' . $this->getNumberOfDays() . ' day', strtotime($currentDate));
         $filterDate = date('Y-m-d h:i:s', $filterDateTime);
 
         $questions = $this->questionsFactory->create();
@@ -44,6 +44,11 @@ class Changestatus
             $item->setStatus(AskQuestion::STATUS_ANSWERED)->save();
         }
 
+    }
+
+    protected function getNumberOfDays()
+    {
+        return self::DAYS_NUM;
     }
 
 }
