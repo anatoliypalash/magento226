@@ -6,6 +6,8 @@ use PalashAs\AskQuestion\Model\AskQuestion;
 
 class Changestatus
 {
+    const DAYS_NUM = 3;
+
     protected $questionsFactory;
 
     /**
@@ -29,8 +31,14 @@ class Changestatus
 
     public function execute()
     {
+        $currentDate = date("Y-m-d h:i:s");
+        $filterDateTime = strtotime('-' . self::DAYS_NUM . ' day', strtotime($currentDate));
+        $filterDate = date('Y-m-d h:i:s', $filterDateTime);
+
         $questions = $this->questionsFactory->create();
-        $collection = $questions->getCollection();
+        $collection = $questions->getCollection()
+            ->addFieldToFilter('status', array('eq' => AskQuestion::STATUS_PENDING))
+            ->addFieldToFilter('created_at', array('lt' => $filterDate));
 
         foreach ($collection as $item) {
             $item->setStatus(AskQuestion::STATUS_ANSWERED)->save();
