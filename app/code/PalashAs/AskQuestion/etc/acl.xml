@@ -8,6 +8,13 @@
                         <resource id="PalashAs_AskQuestion::ask_question_grid" title="Ask Question Grid" translate="title" sortOrder="60" />
                     </resource>
                 </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="PalashAs_AskQuestion::askquestion_settings" title="Ask Question Configuration" translate="title"/>
+                        </resource>
+                    </resource>
+                </resource>
             </resource>
         </resources>
     </acl>
