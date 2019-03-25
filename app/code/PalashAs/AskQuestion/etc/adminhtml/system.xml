@@ -25,6 +25,7 @@
                 <field id="frequency" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Frequency</label>
                     <source_model>Magento\AdminNotification\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Magento\Backup\Model\Config\Backend\Cron</backend_model>
                     <depends>
                         <field id="enable_cron">1</field>
                     </depends>
@@ -32,6 +33,25 @@
             </group>
             <group id="test" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Test Configuration</label>
+                <depends>
+                    <field id="enable_cron">1</field>
+                </depends>
+                <field id="input" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text</label>
+                </field>
+                <field id="test_frequency" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Frequency</label>
+                    <source_model>Magento\Cron\Model\Config\Source\Frequency</source_model>
+                </field>
+                <field id="select" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Multi Select</label>
+                    <source_model>PalashAs\AskQuestion\Model\Config\Source\ListMode</source_model>
+                </field>
+                <field id="dynamical_row" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dynamical Row</label>
+                    <frontend_model>PalashAs\AskQuestion\Block\Adminhtml\Form\Field\AdditionalEmail</frontend_model>
+                    <backend_model>PalashAs\AskQuestion\Model\Config\Backend\AdditionalEmail</backend_model>
+                </field>
             </group>
         </section>
     </system>

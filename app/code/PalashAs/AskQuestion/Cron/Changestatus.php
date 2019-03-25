@@ -3,12 +3,15 @@
 namespace PalashAs\AskQuestion\Cron;
 
 use PalashAs\AskQuestion\Model\AskQuestion;
+use Magento\Store\Model\ScopeInterface;
 
 class Changestatus
 {
     const DAYS_NUM = 3;
 
     protected $questionsFactory;
+
+    protected $scopeInterface;
 
     /**
      * @var \Psr\Log\LoggerInterface
@@ -22,11 +25,13 @@ class Changestatus
      */
     public function __construct(
         \Psr\Log\LoggerInterface $logger,
-        PalashAs\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory
+        PalashAs\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory,
+        ScopeInterface $scopeInterface
     )
     {
         $this->logger = $logger;
         $this->questionsFactory = $askQuestionsFactory;
+        $this->scopeInterface = $scopeInterface;
     }
 
     public function execute()
@@ -48,7 +53,9 @@ class Changestatus
 
     protected function getNumberOfDays()
     {
-        return self::DAYS_NUM;
+        return $this->scopeInterface->getValue(
+            'askquestion_options/cron/frequency', ScopeInterface::SCOPE_STORE, 0
+        );
     }
 
 }
