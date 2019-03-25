@@ -92,7 +92,7 @@ class CustomQtyUpdate extends \Symfony\Component\Console\Command\Command
             $output->writeln("<info>Please input product Id for update!<info>");
             return;
         }
-        if ($input->getArgument('qty')) {
+        if ($input->getArgument('qty') && is_numeric($input->getArgument('qty')) && ($input->getArgument('qty') >= 0)) {
             $qty = $input->getArgument('qty');
         } else {
             $output->writeln("<info>Please input product qty for update!<info>");
