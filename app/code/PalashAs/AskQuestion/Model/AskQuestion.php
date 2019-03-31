@@ -2,28 +2,14 @@
 
 namespace PalashAs\AskQuestion\Model;
 
+use PalashAs\AskQuestion\Api\Data\AskQuestionInterface;
 use PalashAs\AskQuestion\Model\ResourceModel\AskQuestion as AskQuestionResource;
 
 /**
  * Class AskQuestion
  * @package PalashAs\AskQuestion\Model
- *
- * @method int|string getQuestionId()
- * @method int|string getName()
- * @method AskQuestion setName(string $name)
- * @method string getEmail()
- * @method AskQuestion setEmail(string $email)
- * @method string getPhone()
- * @method AskQuestion setPhone(string $phone)
- * @method string getQuestion()
- * @method AskQuestion setQuestion(string $question)
- * @method string getCreatedAt()
- * @method string getStatus()
- * @method AskQuestion setStatus(string $status)
- * @method int|string getStoreId()
- * @method AskQuestion setStoreId(int $storeId)
  */
-class AskQuestion  extends \Magento\Framework\Model\AbstractModel
+class AskQuestion  extends \Magento\Framework\Model\AbstractModel implements AskQuestionInterface
 {
     const STATUS_PENDING = 'pending';
 
@@ -65,6 +51,150 @@ class AskQuestion  extends \Magento\Framework\Model\AbstractModel
     protected function _construct()
     {
         $this->_init(AskQuestionResource::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId(): ?int
+    {
+        return $this->getData('question_id');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setId($id)
+    {
+        return $this->setData('question_id', $id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCreatedAt(): ?string
+    {
+        return $this->getData('created_at');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt(): ?string
+    {
+        return $this->getData('updated_at');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return $this->getData('name');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        return $this->setData('name', $name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail(): string
+    {
+        return $this->getData('email');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        return $this->setData('email', $email);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPhone(): string
+    {
+        return $this->getData('phone');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhone($phone)
+    {
+        return $this->setData('phone', $phone);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSku(): string
+    {
+        return $this->getData('sku');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSku($sku)
+    {
+        return $this->setData('sku', $sku);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuestion(): string
+    {
+        return $this->getData('question');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setQuestion($question)
+    {
+        return $this->setData('question', $question);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStatus(): ?string
+    {
+        return $this->getData('status');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        return $this->setData('status', $status);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStoreId()
+    {
+        return $this->getData('store_id');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStoreId($storeId)
+    {
+        return $this->setData('store_id', $storeId);
     }
 
     /**

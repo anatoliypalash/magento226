@@ -1,6 +1,7 @@
 <?php
 namespace PalashAs\AskQuestion\Controller\Submit;
 
+use PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface;
 use PalashAs\AskQuestion\Model\AskQuestion;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Controller\ResultFactory;
@@ -23,6 +24,12 @@ class Index extends \Magento\Framework\App\Action\Action
     private $askQuestionFactory;
 
     /**
+     * @var AskQuestionRepositoryInterface
+     */
+    private $askQuestionRepository;
+
+
+    /**
      * @var \PalashAs\AskQuestion\Helper\Email
      */
     protected $emailHelper;
@@ -31,18 +38,21 @@ class Index extends \Magento\Framework\App\Action\Action
      * Index constructor.
      * @param \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator
      * @param \PalashAs\AskQuestion\Model\AskQuestionFactory $askQuestionFactory
+     * @param AskQuestionRepositoryInterface $askQuestionRepository
      * @param \Magento\Framework\App\Action\Context $context
      * @param \PalashAs\AskQuestion\Helper\Email $emailHelper
      */
     public function __construct(
         \Magento\Framework\Data\Form\FormKey\Validator $formKeyValidator,
         \PalashAs\AskQuestion\Model\AskQuestionFactory $askQuestionFactory,
+        AskQuestionRepositoryInterface $askQuestionRepository,
         \Magento\Framework\App\Action\Context $context,
         \PalashAs\AskQuestion\Helper\Email $emailHelper
     ) {
         parent::__construct($context);
         $this->formKeyValidator = $formKeyValidator;
         $this->askQuestionFactory = $askQuestionFactory;
+        $this->askQuestionRepository = $askQuestionRepository;
         $this->emailHelper = $emailHelper;
     }
 
@@ -76,7 +86,7 @@ class Index extends \Magento\Framework\App\Action\Action
                     ->setProductName($request->getParam('product_name'))
                     ->setSku($request->getParam('sku'))
                     ->setQuestion($request->getParam('question'));
-                $askQuestion->save();
+                $this->askQuestionRepository->save($askQuestion);
 
                 if ($this->emailHelper->isEnabledEmailsSending()) {
                     $email = $askQuestion->getEmail();
