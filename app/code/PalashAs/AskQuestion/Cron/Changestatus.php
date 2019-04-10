@@ -2,60 +2,95 @@
 
 namespace PalashAs\AskQuestion\Cron;
 
-use PalashAs\AskQuestion\Model\AskQuestion;
+use PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface;
+use PalashAs\AskQuestion\Api\Data\AskQuestionInterface;
+use PalashAs\AskQuestion\Model\Config\Source\ListMode;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use PalashAs\AskQuestion\Model\AskQuestion;
 
 class Changestatus
 {
-    const DAYS_NUM = 3;
-
-    protected $questionsFactory;
-
-    protected $scopeInterface;
-
     /**
-     * @var \Psr\Log\LoggerInterface
+     * Configuration path to customer Ask a Question cron schedule
      */
-    private $logger;
+    private const XML_PATH_ASK_QUESTION_CRON_SCHEDULE = 'askquestion_options/cron/frequency';
 
     /**
-     * Changestatus constructor.
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param PalashAs\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory
+     * @var ScopeConfigInterface
+     */
+    private $scopeConfig;
+
+    /**
+     * @var ListMode
+     */
+    private $listMode;
+
+    /**
+     * @var AskQuestionRepositoryInterface
+     */
+    private $askQuestionRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @param ScopeConfigInterface $scopeConfig
+     * @param ListMode $listMode
+     * @param AskQuestionRepositoryInterface $askQuestionRepository
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
     public function __construct(
-        \Psr\Log\LoggerInterface $logger,
-        PalashAs\AskQuestion\Model\ResourceModel\AskQuestion\CollectionFactory $askQuestionsFactory,
-        ScopeInterface $scopeInterface
-    )
-    {
-        $this->logger = $logger;
-        $this->questionsFactory = $askQuestionsFactory;
-        $this->scopeInterface = $scopeInterface;
+        ScopeConfigInterface $scopeConfig,
+        ListMode $listMode,
+        AskQuestionRepositoryInterface $askQuestionRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder
+    ) {
+        $this->scopeConfig = $scopeConfig;
+        $this->listMode = $listMode;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->askQuestionRepository = $askQuestionRepository;
     }
 
-    public function execute()
+    /**
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function execute(): void
     {
-        $currentDate = date("Y-m-d h:i:s");
-        $filterDateTime = strtotime('-' . $this->getNumberOfDays() . ' day', strtotime($currentDate));
-        $filterDate = date('Y-m-d h:i:s', $filterDateTime);
-
-        $questions = $this->questionsFactory->create();
-        $collection = $questions->getCollection()
-            ->addFieldToFilter('status', array('eq' => AskQuestion::STATUS_PENDING))
-            ->addFieldToFilter('created_at', array('lt' => $filterDate));
-
-        foreach ($collection as $item) {
-            $item->setStatus(AskQuestion::STATUS_ANSWERED)->save();
+        $searchCriteria = $this->searchCriteriaBuilder->addFilter('status', AskQuestion::STATUS_PENDING)->create();
+        $questions = $this->askQuestionRepository->getList($searchCriteria);
+        foreach ($questions->getItems() as $item) {
+            /** @var AskQuestionInterface $question */
+            $question = $this->askQuestionRepository->getById($item['question_id']);
+            $question->setStatus(AskQuestion::STATUS_PROCESSED);
+            $this->askQuestionRepository->save($question);
         }
-
     }
 
-    protected function getNumberOfDays()
+    /**
+     * @return int
+     */
+    public function getNumberOfDays(): int
     {
-        return $this->scopeInterface->getValue(
-            'askquestion_options/cron/frequency', ScopeInterface::SCOPE_STORE, 0
+        foreach ($this->listMode->toOptionArray() as $key => $item) {
+            if ($item ['value'] === $this->getCronSchedule()) {
+                return $item ['days'];
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCronSchedule(): string
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_ASK_QUESTION_CRON_SCHEDULE,
+            ScopeInterface::SCOPE_STORE
         );
     }
-
 }

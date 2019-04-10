@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Ask Question Service -->
+    <route url="/V1/askQuestions" method="GET">
+        <service class="PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/askQuestions/:askQuestionId" method="DELETE">
+        <service class="PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="PalashAs::ask_question" />
+        </resources>
+    </route>
+    <route url="/V1/askQuestions/:askQuestionId" method="GET">
+        <service class="PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="PalashAs::ask_question" />
+        </resources>
+    </route>
+    <route url="/V1/askQuestions" method="POST">
+        <service class="PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="PalashAs::ask_question" />
+        </resources>
+    </route>
+    <route url="/V1/askQuestions" method="POST">
+        <service class="PalashAs\AskQuestion\Api\AskQuestionRepositoryInterface" method="delete"/>
+        <resources>
+            <resource ref="PalashAs::ask_question" />
+        </resources>
+    </route>
+</routes>
