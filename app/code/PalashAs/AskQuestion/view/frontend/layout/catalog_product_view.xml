@@ -11,6 +11,15 @@
                     <argument name="title" translate="true" xsi:type="string">Ask Question</argument>
                 </arguments>
             </block>
+            <block class="PalashAs\AskQuestion\Block\Questions"
+                   name="questions.list.tab"
+                   as="question_list"
+                   template="PalashAs_AskQuestion::product/view/question_list.phtml"
+                   group="detailed_info">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Asked Questions</argument>
+                </arguments>
+            </block>
         </referenceBlock>
     </body>
 </page>

@@ -1,3 +1,5 @@
+<?php $product = $block->getProduct(); ?>
+
 <form class="form ask-question"
       action="<?= $block->escapeUrl($block->getUrl('ask_question/submit')) ?>"
       id="ask-question-form"
@@ -38,12 +40,12 @@
                 />
             </div>
         </div>
-        <div class="field telephone">
+        <div class="field phone">
             <label class="label" for="telephone">
                 <span><?= $block->escapeHtml(__('Phone Number')) ?></span>
             </label>
             <div class="control">
-                <input name="telephone"
+                <input name="phone"
                        id="telephone"
                        placeholder="<?= $block->escapeHtmlAttr(__('+380xxxxxxxxx')) ?>"
                        title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>"
@@ -71,6 +73,8 @@
     </fieldset>
     <div class="actions-toolbar">
         <div class="primary">
+            <input type="hidden" name="sku" value="<?= $block->escapeHtml($product->getSku()) ?>"/>
+            <input type="hidden" name="product_name" value="<?= $block->escapeHtml($product->getName()) ?>"/>
             <input type="hidden" name="hideit" id="hideit" value=""/>
             <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
                 <span><?= $block->escapeHtml(__('Submit')) ?></span>
