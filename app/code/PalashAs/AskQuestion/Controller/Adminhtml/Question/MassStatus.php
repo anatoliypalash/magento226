@@ -28,7 +28,7 @@ class MassStatus extends AbstractMassAction
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
-     */AbstractMassaction
+     */
     public function __construct(
         Context $context,
         Filter $filter,

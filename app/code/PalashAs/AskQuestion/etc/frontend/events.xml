@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!--<event name="controller_action_predispatch_catalog_product_view">-->
+        <!--<observer name="geekhub_requestsample"-->
+                  <!--instance="PalashAs\AskQuestion\Observer\Catalog\Controller\Product\View\Predispatch"-->
+        <!--/>-->
+    <!--</event>-->
+    <event name="layout_load_before">
+        <observer name="askquestion_rendering"
+                  instance="PalashAs\AskQuestion\Observer\Catalog\Block\Product\View"
+        />
+    </event>
+</config>

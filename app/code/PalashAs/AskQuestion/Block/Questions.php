@@ -44,7 +44,6 @@ class Questions extends \Magento\Framework\View\Element\Template
         $collection = $this->collectionFactory->create();
         $collection
             ->addFieldToFilter('sku', ['eq' => $this->getCurrentProduct()->getSku()])
-            ->addStoreFilter()
             ->getSelect()
             ->orderRand();
         if ($limit = $this->getData('limit')) {

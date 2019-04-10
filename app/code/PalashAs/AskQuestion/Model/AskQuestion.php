@@ -35,6 +35,11 @@ class AskQuestion  extends \Magento\Framework\Model\AbstractModel
     private $storeManager;
 
     /**
+     * @var string
+     */
+    protected $_eventPrefix = 'palashas_ask_question';
+
+    /**
      * @param \Magento\Framework\Model\Context $context
      * @param \Magento\Framework\Registry $registry
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
